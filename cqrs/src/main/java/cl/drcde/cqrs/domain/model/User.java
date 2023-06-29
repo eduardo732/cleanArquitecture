@@ -1,61 +1,61 @@
 package cl.drcde.cqrs.domain.model;
 
+import cl.drcde.cqrs.domain.events.CreatedUserEvent;
 import cl.drcde.cqrs.domain.shared.aggregateroot.AggregateRoot;
-import cl.drcde.cqrs.domain.shared.eventbus.Event;
 import cl.drcde.cqrs.domain.shared.eventbus.EventCollection;
+import cl.drcde.cqrs.domain.shared.model.BaseModel;
+import cl.drcde.cqrs.domain.vo.Password;
+import cl.drcde.cqrs.domain.vo.UUIDv4;
+import cl.drcde.cqrs.domain.vo.Username;
 
 import javax.persistence.Transient;
 
-public class User implements AggregateRoot {
-    private Long id;
-    private String username;
-    private String password;
+public class User extends BaseModel implements AggregateRoot {
+    private Username username;
+    private Password password;
     @Transient
-    private EventCollection events = new EventCollection();
+    private final EventCollection events = new EventCollection();
 
-    public User(Long id, String username, String password) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-    }
     public User() {
+        super();
     }
 
-    public User(String username, String password) {
+    public User(
+            UUIDv4 id,
+            Username username,
+            Password password
+    ) {
+        super(id);
         this.username = username;
         this.password = password;
-        //TODO: agregar evento de usuario creado
-//        this.getEvents().add(
-//            new Event()
-//        );
+        this.getEvents().add(
+                new CreatedUserEvent(
+                        new UserId(this.id.value()),
+                        this.username,
+                        this.password
+                )
+        );
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
+    public User(
+            Username username,
+            Password password
+    ) {
+        super();
         this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Username getUsername() {
+        return this.username;
+    }
+
+    public Password getPassword() {
+        return this.password;
     }
 
     @Override
     public EventCollection getEvents() {
-        return null;
+        return this.events;
     }
 }

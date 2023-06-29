@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ComponentScan("cl.drcde.cqrs.application.command")
 public class CommandConfig {
-    //TODO: Engorrosa forma de vincular los handlers como comandos, hay que buscar una forma más automatizada
+    //TODO: Engorrosa forma de vincular los handlers con comandos, hay que buscar una forma más automatizada
     private final UserService userService;
     private final EventBus eventBus;
 
@@ -21,6 +21,6 @@ public class CommandConfig {
 
     @Bean
     public CreateUserCommandHandler createUserHandler() {
-        return new CreateUserCommandHandler(this.userService, this.eventBus);
+        return new CreateUserCommandHandler(this.userService);
     }
 }

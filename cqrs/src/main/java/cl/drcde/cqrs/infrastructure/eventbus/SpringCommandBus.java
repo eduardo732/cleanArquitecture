@@ -21,12 +21,6 @@ public final class SpringCommandBus extends BaseBus implements CommandBus {
         this.applicationContext = applicationContext;
     }
 
-    private String getCommandClass(CommandHandler commandHandler) {
-        log.debug("SpringCommandBus::getCommandClass command {}", commandHandler);
-        log.debug("SpringCommandBus::getCommandClass commandClass {}", commandHandler.getClass().getSimpleName());
-        return commandHandler.getClass().getSimpleName();
-    }
-
     @Override
     public void handle(Command command) throws CommandBusException {
         String commandName = command.getClass().getSimpleName();

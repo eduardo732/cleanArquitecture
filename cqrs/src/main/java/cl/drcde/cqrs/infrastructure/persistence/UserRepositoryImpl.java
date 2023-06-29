@@ -2,8 +2,9 @@ package cl.drcde.cqrs.infrastructure.persistence;
 
 
 import cl.drcde.cqrs.domain.model.User;
+import cl.drcde.cqrs.domain.model.UserId;
 import cl.drcde.cqrs.domain.repository.UserRepository;
-import cl.drcde.cqrs.infrastructure.entity.JpaUser;
+import cl.drcde.cqrs.domain.vo.UUIDv4;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityNotFoundException;
@@ -11,7 +12,7 @@ import java.util.Optional;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository {
-    private JpaUserRepository jpaUserRepository;
+    private final JpaUserRepository jpaUserRepository;
 
     public UserRepositoryImpl(JpaUserRepository jpaUserRepository) {
         this.jpaUserRepository = jpaUserRepository;
@@ -19,24 +20,21 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User save(User user) {
-        // Convertir la entidad User a JpaUser
-        JpaUser jpaUser = new JpaUser(user.getUsername(), user.getPassword());
-        // Guardar en el repositorio JPA
+        UUIDv4 userId = UserId.generate();
+        JpaUser jpaUser = new JpaUser(userId, user.getUsername(), user.getPassword());
         JpaUser savedUser = this.jpaUserRepository.save(jpaUser);
-        // Convertir la entidad JpaUser a User
-        User savedDomainUser = new User(savedUser.getId(), savedUser.getUsername(), savedUser.getPassword());
-        return savedDomainUser;
+        return new User(savedUser.getId(), savedUser.getUsername(), savedUser.getPassword());
     }
 
     @Override
-    public User findById(Long id) {
+    public User findById(UUIDv4 id) {
         Optional<JpaUser> jpaUser = this.jpaUserRepository.findById(id);
         if(jpaUser.isEmpty()) throw new EntityNotFoundException("User not found");
-        User user = new User();
-        user.setPassword(jpaUser.get().getPassword());
-        user.setUsername(jpaUser.get().getUsername());
-        user.setId(jpaUser.get().getId());
-        return user;
+        return new User(
+                jpaUser.get().getId(),
+                jpaUser.get().getUsername(),
+                jpaUser.get().getPassword()
+        );
     }
 
     @Override

@@ -1,15 +1,24 @@
 package cl.drcde.cqrs.domain.model;
 
+import cl.drcde.cqrs.domain.vo.Password;
+import cl.drcde.cqrs.domain.vo.UUIDv4;
+import cl.drcde.cqrs.domain.vo.Username;
 import org.junit.Test;
+
+import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
 
 public class UserTest {
     @Test
     public void userPropertiesTest() {
-        User user = new User(1L, "Jhon_doe", "password");
-        assertEquals(Long.valueOf(1), user.getId());
-        assertEquals("Jhon_doe", user.getUsername());
-        assertEquals("password", user.getPassword());
+        UUIDv4 randomUserId = new UserId(UUIDv4.generate().value());
+        Username username = new Username("test");
+        Password password = new Password("password");
+        User user = new User(randomUserId, username, password);
+        assertEquals(randomUserId, user.getId());
+        assertEquals(username, user.getUsername());
+        assertEquals(password, user.getPassword());
+        assertEquals(Boolean.FALSE, user.getEvents().all().isEmpty());
     }
 }
