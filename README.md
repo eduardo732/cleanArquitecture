@@ -1,4 +1,4 @@
-# Documentación del Microservicio de Ejemplo
+# Prueba de concepto para microservicio con prácticas robustas de desarrollo
 # Introducción
 Este documento proporciona una guía para comprender y utilizar el Microservicio de Ejemplo. El microservicio está desarrollado en Java 11 utilizando Spring Boot y sigue las prácticas de Arquitectura Hexagonal, TDD y CQRS. El objetivo de este microservicio es demostrar la implementación de estas prácticas y tecnologías clave.
 
