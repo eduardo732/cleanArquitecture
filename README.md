@@ -2,6 +2,9 @@
 # Introducción
 Este documento proporciona una guía para comprender y utilizar el Microservicio de Ejemplo. El microservicio está desarrollado en Java 11 utilizando Spring Boot y sigue las prácticas de Arquitectura Hexagonal, TDD y CQRS. El objetivo de este microservicio es demostrar la implementación de estas prácticas y tecnologías clave.
 
+![image](https://github.com/eduardo732/cleanArquitecture/assets/54371860/00fe687b-beae-42be-b13c-f73a85d2ce12)
+
+
 # Características Principales
 * Arquitectura Hexagonal: El microservicio sigue el enfoque de Arquitectura Hexagonal (también conocida como Puertos y Adaptadores) para lograr una alta separación de preocupaciones y modularidad.
 * TDD (Desarrollo Dirigido por Pruebas): Se ha aplicado TDD durante el desarrollo del microservicio para garantizar la calidad del código y permitir una mayor confianza al realizar cambios o mejoras en el futuro.
