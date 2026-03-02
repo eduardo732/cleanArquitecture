@@ -5,15 +5,12 @@ import cl.drcde.cqrs.domain.shared.aggregateroot.AggregateRoot;
 import cl.drcde.cqrs.domain.shared.eventbus.EventCollection;
 import cl.drcde.cqrs.domain.shared.model.BaseModel;
 import cl.drcde.cqrs.domain.vo.Password;
-import cl.drcde.cqrs.domain.vo.UUIDv4;
 import cl.drcde.cqrs.domain.vo.Username;
 
-import javax.persistence.Transient;
 
 public class User extends BaseModel implements AggregateRoot {
     private Username username;
     private Password password;
-    @Transient
     private final EventCollection events = new EventCollection();
 
     public User() {
@@ -21,7 +18,7 @@ public class User extends BaseModel implements AggregateRoot {
     }
 
     public User(
-            UUIDv4 id,
+            UserId id,
             Username username,
             Password password
     ) {
@@ -30,7 +27,7 @@ public class User extends BaseModel implements AggregateRoot {
         this.password = password;
         this.getEvents().add(
                 new CreatedUserEvent(
-                        new UserId(this.id.value()),
+                        id,
                         this.username,
                         this.password
                 )

@@ -5,7 +5,7 @@ import lombok.NonNull;
 import java.util.Objects;
 import java.util.UUID;
 
-public final class UUIDv4 implements ValueObject {
+public class UUIDv4 implements ValueObject {
     public static final int LENGTH = 36;
     private final @NonNull String _value;
 

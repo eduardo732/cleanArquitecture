@@ -8,7 +8,7 @@ import cl.drcde.cqrs.domain.vo.Username;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.persistence.EntityNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;

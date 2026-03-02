@@ -5,6 +5,7 @@ import cl.drcde.cqrs.domain.shared.commandbus.CommandBus;
 import cl.drcde.cqrs.domain.shared.commandbus.exception.CommandBusException;
 import cl.drcde.cqrs.domain.shared.exception.DomainException;
 import cl.drcde.cqrs.presentation.dto.CreateUserDto;
+import cl.drcde.cqrs.presentation.shared.ApiResponse;
 import cl.drcde.cqrs.presentation.shared.Messages;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -36,11 +38,13 @@ public class CreateUserControllerTest {
         dto.setPassword(PASSWORD);
 
         // Act
-        ResponseEntity<String> response = createUserController.post(dto);
+        ResponseEntity<ApiResponse<String>> response = createUserController.post(dto);
 
         // Assert
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        assertEquals(Messages.CREATED, response.getBody());
+        assertNotNull(response.getBody());
+        assertEquals(HttpStatus.CREATED.value(), response.getBody().getStatus());
+        assertEquals(Messages.CREATED, response.getBody().getData());
         verify(commandBus, times(1)).handle(any(CreateUserCommand.class));
     }
 
@@ -54,16 +58,14 @@ public class CreateUserControllerTest {
         doThrow(new DomainException("Domain exception message")).when(commandBus).handle(any(CreateUserCommand.class));
 
         // Act
-        ResponseEntity<String> response = createUserController.post(dto);
+        ResponseEntity<ApiResponse<String>> response = createUserController.post(dto);
 
         // Assert
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
-        assertEquals(Messages.BAD_REQUEST, response.getBody());
+        assertNotNull(response.getBody());
+        assertEquals(HttpStatus.BAD_REQUEST.value(), response.getBody().getStatus());
+        assertEquals(Messages.BAD_REQUEST, response.getBody().getData());
         verify(commandBus, times(1)).handle(any(CreateUserCommand.class));
-        // Verify that the exception was logged
-        // You can use a logging framework or a custom logger implementation for verification
-        // For example, if you are using Mockito's `Mockito.verify` with a logger instance:
-        // verify(logger).warn(eq("Domain exception message"), any(DomainException.class));
     }
 
     @Test
@@ -76,15 +78,13 @@ public class CreateUserControllerTest {
         doThrow(new RuntimeException("Unexpected exception")).when(commandBus).handle(any(CreateUserCommand.class));
 
         // Act
-        ResponseEntity<String> response = createUserController.post(dto);
+        ResponseEntity<ApiResponse<String>> response = createUserController.post(dto);
 
         // Assert
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
-        assertEquals(Messages.INTERNAL_SERVER_ERROR, response.getBody());
+        assertNotNull(response.getBody());
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR.value(), response.getBody().getStatus());
+        assertEquals(Messages.INTERNAL_SERVER_ERROR, response.getBody().getData());
         verify(commandBus, times(1)).handle(any(CreateUserCommand.class));
-        // Verify that the exception was logged
-        // You can use a logging framework or a custom logger implementation for verification
-        // For example, if you are using Mockito's `Mockito.verify` with a logger instance:
-        // verify(logger).error(eq("Unexpected exception"), any(RuntimeException.class));
     }
 }

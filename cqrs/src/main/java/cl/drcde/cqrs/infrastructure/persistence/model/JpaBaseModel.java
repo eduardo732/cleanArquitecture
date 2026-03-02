@@ -3,45 +3,48 @@ package cl.drcde.cqrs.infrastructure.persistence.model;
 import cl.drcde.cqrs.domain.vo.Active;
 import cl.drcde.cqrs.domain.vo.UUIDv4;
 import cl.drcde.cqrs.infrastructure.persistence.converter.ActiveAttributeConverter;
-import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
-import javax.persistence.Convert;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
+import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @MappedSuperclass
 public abstract class JpaBaseModel {
 
     @Id
-    @Type(type = "uuid-char")
-    @Column(name = "id", updatable = false, nullable = false, unique = true, length = UUIDv4.LENGTH)
-    protected UUIDv4 id;
+    @Column(name = "id", updatable = false, nullable = false, unique = true, length = 36)
+    public String id;
+
     @NotNull(message = "The date can't be empty")
     @Column(name = "created_date", nullable = false)
     protected LocalDateTime createdDate;
+
     @NotNull(message = "The attribute active can't be empty")
     @Convert(converter = ActiveAttributeConverter.class)
     @Column(name = "active", nullable = false)
     protected Active active;
 
     public JpaBaseModel(UUIDv4 id) {
-        this.id = id;
+        this.id = id != null ? id.value() : null;
         this.createdDate = LocalDateTime.now();
         this.active = new Active(Boolean.TRUE);
     }
 
     public JpaBaseModel() {
-        this.id = UUIDv4.generate();
+        this.id = UUIDv4.generate().value();
         this.createdDate = LocalDateTime.now();
         this.active = new Active(Boolean.TRUE);
     }
 
-    public UUIDv4 getId() {
+    public String getId() {
         return id;
+    }
+
+    public UUIDv4 getIdAsUUID() {
+        return id != null ? new UUIDv4(id) : null;
     }
 
     public LocalDateTime getCreatedDate() {

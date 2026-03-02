@@ -6,14 +6,18 @@ import cl.drcde.cqrs.domain.vo.Username;
 import cl.drcde.cqrs.infrastructure.persistence.converter.PasswordAttributeConverter;
 import cl.drcde.cqrs.infrastructure.persistence.converter.UsernameAttributeConverter;
 import cl.drcde.cqrs.infrastructure.persistence.model.JpaBaseModel;
+import lombok.Getter;
 import org.hibernate.Hibernate;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import java.util.Objects;
 
-@Table(name = "user")
-@AttributeOverride(name = "id", column = @Column(name = "user_id"))
+@Getter
+@Table(name = "app_user")
+@AttributeOverrides({
+    @AttributeOverride(name = "id", column = @Column(name = "user_id"))
+})
 @Entity
 public final class JpaUser extends JpaBaseModel {
 
@@ -40,15 +44,7 @@ public final class JpaUser extends JpaBaseModel {
         this.password = password;
     }
 
-    public Username getUsername() {
-        return username;
-    }
-
-    public Password getPassword() {
-        return password;
-    }
-
-    @Override
+  @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
