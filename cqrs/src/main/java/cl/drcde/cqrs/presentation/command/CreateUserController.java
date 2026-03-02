@@ -4,6 +4,7 @@ import cl.drcde.cqrs.application.command.CreateUserCommand;
 import cl.drcde.cqrs.domain.shared.commandbus.CommandBus;
 import cl.drcde.cqrs.domain.shared.exception.DomainException;
 import cl.drcde.cqrs.presentation.dto.CreateUserDto;
+import cl.drcde.cqrs.presentation.shared.ApiResponse;
 import cl.drcde.cqrs.presentation.shared.Messages;
 import cl.drcde.cqrs.presentation.shared.Routes;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@EnableAutoConfiguration
 public final class CreateUserController {
    private final CommandBus commandBus;
 
@@ -31,7 +31,7 @@ public final class CreateUserController {
     //TODO: investigar sobre jwt para el consumo de la api
 
     @PostMapping(value = Routes.User.POST)
-    public ResponseEntity<String> post(@RequestBody CreateUserDto dto) {
+    public ResponseEntity<ApiResponse<String>> post(@RequestBody CreateUserDto dto) {
         log.info("[User] CreateUserController::post dto: {}", dto);
         HttpStatus httpStatus;
         String body;
@@ -53,6 +53,8 @@ public final class CreateUserController {
             body = Messages.INTERNAL_SERVER_ERROR;
             log.error(e.getMessage(), e);
         }
-        return ResponseEntity.status(httpStatus).body(body);
+        return ResponseEntity.status(httpStatus).body(
+                new ApiResponse<>(httpStatus.value(), httpStatus.name(),body)
+        );
     }
 }
