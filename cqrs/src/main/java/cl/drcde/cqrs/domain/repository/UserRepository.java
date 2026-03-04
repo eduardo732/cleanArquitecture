@@ -9,9 +9,9 @@ import java.util.UUID;
 /**
  * UserRepository: Interfaz del repositorio
  *
- * ✅ VENTAJA: Domain no conoce JPA
- * ✅ VENTAJA: Agnóstico de BD
- * ✅ VENTAJA: Fácil de testear con mocks
+ * VENTAJA: Domain no conoce JPA
+ * VENTAJA: Agnóstico de BD
+ * VENTAJA: Fácil de testear con mocks
  */
 public interface UserRepository {
     User save(User user);

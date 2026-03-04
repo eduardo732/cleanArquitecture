@@ -26,9 +26,9 @@ import static org.mockito.Mockito.*;
 /**
  * Test: FindAllUsersController
  *
- * ✅ VENTAJA: Tests del endpoint HTTP
- * ✅ VENTAJA: Mock del QueryBus
- * ✅ VENTAJA: Sin servidor HTTP real
+ * VENTAJA: Tests del endpoint HTTP
+ * VENTAJA: Mock del QueryBus
+ * VENTAJA: Sin servidor HTTP real
  */
 @RunWith(MockitoJUnitRunner.class)
 public class FindAllUsersControllerTest {

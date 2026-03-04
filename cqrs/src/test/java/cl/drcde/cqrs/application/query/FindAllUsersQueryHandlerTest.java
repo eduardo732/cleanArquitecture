@@ -21,9 +21,9 @@ import static org.mockito.Mockito.*;
 /**
  * Test: FindAllUsersQueryHandler
  *
- * ✅ VENTAJA: Tests muy rápidos (sin BD real)
- * ✅ VENTAJA: Aislados e independientes
- * ✅ VENTAJA: Sin estado compartido
+ * VENTAJA: Tests muy rápidos (sin BD real)
+ * VENTAJA: Aislados e independientes
+ * VENTAJA: Sin estado compartido
  */
 @RunWith(MockitoJUnitRunner.class)
 public class FindAllUsersQueryHandlerTest {

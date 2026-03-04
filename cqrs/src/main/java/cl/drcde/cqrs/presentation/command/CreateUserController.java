@@ -8,7 +8,6 @@ import cl.drcde.cqrs.presentation.shared.ApiResponse;
 import cl.drcde.cqrs.presentation.shared.Messages;
 import cl.drcde.cqrs.presentation.shared.Routes;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,7 +42,7 @@ public final class CreateUserController {
                     )
             );
             httpStatus = HttpStatus.CREATED;
-            body = Messages.CREATED;
+            body = Messages.USER_CREATED_SUCCESSFULLY;
         } catch (DomainException exception) {
             httpStatus = HttpStatus.BAD_REQUEST;
             body = Messages.BAD_REQUEST;

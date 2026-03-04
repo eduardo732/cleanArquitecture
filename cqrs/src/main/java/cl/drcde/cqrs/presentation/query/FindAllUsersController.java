@@ -20,13 +20,13 @@ import java.util.List;
 /**
  * Controller: Endpoints de consulta (GET)
  *
- * ✅ VENTAJA: Minimalista, solo mapea HTTP → Query
- * ✅ VENTAJA: Sin lógica de negocio
- * ✅ VENTAJA: QueryBus maneja la orquestación
+ * VENTAJA: Minimalista, solo mapea HTTP a Query
+ * VENTAJA: Sin logica de negocio
+ * VENTAJA: QueryBus maneja la orquestacion
  */
 @Slf4j
 @RestController
-@RequestMapping(Routes.User.BASE)
+@RequestMapping(Routes.User.PREFIX)
 public class FindAllUsersController {
 
     private final QueryBus queryBus;
@@ -97,7 +97,7 @@ public class FindAllUsersController {
      * @param id ID del usuario a buscar (UUID)
      * @return ResponseEntity con el usuario
      */
-    @GetMapping(value = Routes.User.GET_BY_ID)
+    @GetMapping(value = Routes.User.USER_ID)
     public ResponseEntity<ApiResponse<User>> getById(
             @PathVariable(name = "id") String id
     ) {
@@ -107,7 +107,7 @@ public class FindAllUsersController {
             // 1. Crear la query con el ID
             FindByIdQuery query = new FindByIdQuery(id);
 
-            // 2. Ejecutar a través del QueryBus
+            // 2. Ejecutar a traves del QueryBus
             User user = this.queryBus.handle(query);
 
             // 3. Respuesta exitosa

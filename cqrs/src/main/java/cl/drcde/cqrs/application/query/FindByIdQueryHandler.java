@@ -10,9 +10,9 @@ import org.springframework.stereotype.Component;
 /**
  * QueryHandler: Buscar usuario por ID
  *
- * ✅ VENTAJA: Completamente desacoplada de comandos
- * ✅ VENTAJA: Puede ser optimizada (caché, BD separada, etc)
- * ✅ VENTAJA: No genera eventos
+ * VENTAJA: Completamente desacoplada de comandos
+ * VENTAJA: Puede ser optimizada (cache, BD separada, etc)
+ * VENTAJA: No genera eventos
  */
 @Slf4j
 @Component
@@ -27,9 +27,9 @@ public class FindByIdQueryHandler implements QueryHandler<FindByIdQuery, User> {
     /**
      * Maneja la query de búsqueda por ID
      *
-     * ✅ Solo lectura
-     * ✅ Sin efectos secundarios
-     * ✅ Puede ser cacheada sin problemas
+     * Solo lectura
+     * Sin efectos secundarios
+     * Puede ser cacheada sin problemas
      *
      * @param query Query con el ID a buscar
      * @return Usuario encontrado

@@ -44,7 +44,7 @@ public class CreateUserControllerTest {
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
         assertNotNull(response.getBody());
         assertEquals(HttpStatus.CREATED.value(), response.getBody().getStatus());
-        assertEquals(Messages.CREATED, response.getBody().getData());
+        assertEquals(Messages.USER_CREATED_SUCCESSFULLY, response.getBody().getData());
         verify(commandBus, times(1)).handle(any(CreateUserCommand.class));
     }
 

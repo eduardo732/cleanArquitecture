@@ -12,11 +12,11 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
- * UserRepositoryImpl: Implementación del repositorio
+ * UserRepositoryImpl: Implementacion del repositorio
  *
- * ✅ VENTAJA: Domain no conoce esta clase
- * ✅ VENTAJA: Mapea JpaUser ↔ User
- * ✅ VENTAJA: Fácil cambiar a otra BD
+ * VENTAJA: Domain no conoce esta clase
+ * VENTAJA: Mapea JpaUser <-> User
+ * VENTAJA: Facil cambiar a otra BD
  */
 @Repository
 public class UserRepositoryImpl implements UserRepository {
@@ -52,9 +52,9 @@ public class UserRepositoryImpl implements UserRepository {
     /**
      * Obtiene todos los usuarios
      *
-     * ✅ Mapea JpaUser → User
-     * ✅ Mantiene dominio independiente
-     * ✅ Aquí podrías agregar paginación
+     * Mapea JpaUser -> User
+     * Mantiene dominio independiente
+     * Aquí podrías agregar paginación
      */
     @Override
     public List<User> findAll() {

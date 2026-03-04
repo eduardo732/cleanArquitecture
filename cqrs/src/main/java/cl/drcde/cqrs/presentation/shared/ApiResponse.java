@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 /**
  * ApiResponse: Respuesta genérica para todos los endpoints
  *
- * ✅ VENTAJA: Formato consistente en toda la API
- * ✅ VENTAJA: Genérico para cualquier tipo de dato
- * ✅ VENTAJA: Fácil de serializar/deserializar
+ * VENTAJA: Formato consistente en toda la API
+ * VENTAJA: Genérico para cualquier tipo de dato
+ * VENTAJA: Fácil de serializar/deserializar
  */
 @AllArgsConstructor
 @NoArgsConstructor

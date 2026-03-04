@@ -20,9 +20,9 @@ import static org.mockito.Mockito.*;
 /**
  * Test: FindByIdQueryHandler
  *
- * ✅ VENTAJA: Tests muy rápidos (sin BD real)
- * ✅ VENTAJA: Mock del repositorio
- * ✅ VENTAJA: Completamente aislado
+ * VENTAJA: Tests muy rápidos (sin BD real)
+ * VENTAJA: Mock del repositorio
+ * VENTAJA: Completamente aislado
  */
 @RunWith(MockitoJUnitRunner.class)
 public class FindByIdQueryHandlerTest {

@@ -12,9 +12,9 @@ import java.util.List;
 /**
  * QueryHandler: Obtener todos los usuarios
  *
- * ✅ VENTAJA: Completamente desacoplada de comandos
- * ✅ VENTAJA: Puede escalar BD de lectura independientemente
- * ✅ VENTAJA: Sin efectos secundarios
+ * VENTAJA: Completamente desacoplada de comandos
+ * VENTAJA: Puede escalar BD de lectura independientemente
+ * VENTAJA: Sin efectos secundarios
  */
 @Slf4j
 @Component
@@ -29,15 +29,15 @@ public class FindAllUsersQueryHandler implements QueryHandler<FindAllUsersQuery,
     /**
      * Maneja la query de obtener todos los usuarios
      *
-     * ✅ Solo lectura
-     * ✅ Sin efectos secundarios
-     * ✅ Puede usar BD, caché o Elasticsearch
+     * Solo lectura
+     * Sin efectos secundarios
+     * Puede usar BD, caché o Elasticsearch
      *
      * @param query Query de búsqueda (vacía en este caso)
      * @return Lista de todos los usuarios
      */
     @Override
-    public List<User> handle(FindAllUsersQuery query) {
+    public List<User> handle(FindAllUsersQuery query) throws QueryBusException {
         log.info("Obteniendo todos los usuarios");
 
         // Aquí podrías:
@@ -52,11 +52,5 @@ public class FindAllUsersQueryHandler implements QueryHandler<FindAllUsersQuery,
         log.info("Se encontraron {} usuarios", users.size());
         return users;
     }
-
-  @Override
-  public FindAllUsersQuery handle(List<User> query) throws QueryBusException {
-    return null;
-  }
-}
 
 }
