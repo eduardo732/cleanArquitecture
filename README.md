@@ -2,23 +2,6 @@
 
 **Demostración de arquitectura empresarial escalable con Java 21, Spring Boot 3 y H2**
 
----
-
-## 📋 Tabla de Contenidos
-
-- [Introducción](#introducción)
-- [Arquitectura](#arquitectura)
-- [Estructura del Proyecto](#estructura-del-proyecto)
-- [Ventajas y Desventajas](#ventajas-y-desventajas)
-- [Casos de Uso Ideales](#casos-de-uso-ideales)
-- [Requisitos Previos](#requisitos-previos)
-- [Instalación y Configuración](#instalación-y-configuración)
-- [Uso del Microservicio](#uso-del-microservicio)
-- [Testing](#testing)
-- [Referencias](#referencias)
-
----
-
 ## 🎯 Introducción
 
 Este proyecto es una **prueba de concepto** que demuestra cómo combinar dos patrones arquitectónicos avanzados:
